@@ -268,8 +268,7 @@ class NetworkLoggerScreen extends StatelessWidget {
     );
   }
 
-  final TextEditingController searchController =
-      TextEditingController(text: null);
+  final TextEditingController searchController = TextEditingController(text: null);
 
   /// filte events with search keyword
   List<NetworkEvent> getEvents() {
@@ -339,15 +338,12 @@ class NetworkLoggerScreen extends StatelessWidget {
                       ),
                       leading: Icon(
                         item.error == null
-                            ? (item.response == null
-                                ? Icons.hourglass_empty
-                                : Icons.done)
+                            ? (item.response == null ? Icons.hourglass_empty : Icons.done)
                             : Icons.error,
                       ),
                       trailing: _AutoUpdate(
                         duration: Duration(seconds: 1),
-                        builder: (context) =>
-                            Text(_timeDifference(item.timestamp!)),
+                        builder: (context) => Text(_timeDifference(item.timestamp!)),
                       ),
                       onTap: () => NetworkLoggerEventScreen.open(
                         context,
@@ -382,8 +378,7 @@ final _jsonEncoder = JsonEncoder.withIndent('  ');
 
 /// Screen that displays log entry details.
 class NetworkLoggerEventScreen extends StatelessWidget {
-  const NetworkLoggerEventScreen({Key? key, required this.event})
-      : super(key: key);
+  const NetworkLoggerEventScreen({Key? key, required this.event}) : super(key: key);
 
   static Route<void> route({
     required NetworkEvent event,
@@ -497,8 +492,7 @@ class NetworkLoggerEventScreen extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(15, 10, 15, 5),
-          child:
-              Text('TIMESTAMP', style: Theme.of(context).textTheme.bodySmall),
+          child: Text('TIMESTAMP', style: Theme.of(context).textTheme.bodySmall),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -507,8 +501,7 @@ class NetworkLoggerEventScreen extends StatelessWidget {
         if (event.request!.headers.isNotEmpty) ...[
           Padding(
             padding: const EdgeInsets.fromLTRB(15, 10, 15, 5),
-            child:
-                Text('HEADERS', style: Theme.of(context).textTheme.bodySmall),
+            child: Text('HEADERS', style: Theme.of(context).textTheme.bodySmall),
           ),
           buildHeadersViewer(context, event.request!.headers.entries),
         ],
@@ -560,8 +553,7 @@ class NetworkLoggerEventScreen extends StatelessWidget {
         if (event.response?.headers.isNotEmpty ?? false) ...[
           Padding(
             padding: const EdgeInsets.fromLTRB(15, 10, 15, 5),
-            child:
-                Text('HEADERS', style: Theme.of(context).textTheme.bodySmall),
+            child: Text('HEADERS', style: Theme.of(context).textTheme.bodySmall),
           ),
           buildHeadersViewer(
             context,
@@ -583,10 +575,13 @@ class NetworkLoggerEventScreen extends StatelessWidget {
 
     Widget? bottom;
     if (showResponse) {
-      bottom = TabBar(tabs: [
-        Tab(text: 'Request'),
-        Tab(text: 'Response'),
-      ]);
+      bottom = TabBar(
+        isScrollable: true,
+        tabs: [
+          Tab(text: 'Request'),
+          Tab(text: 'Response'),
+        ],
+      );
     }
 
     return DefaultTabController(
@@ -612,8 +607,7 @@ class NetworkLoggerEventScreen extends StatelessWidget {
 
 /// Widget builder that re-builds widget repeatedly with [duration] interval.
 class _AutoUpdate extends StatefulWidget {
-  const _AutoUpdate({Key? key, required this.duration, required this.builder})
-      : super(key: key);
+  const _AutoUpdate({Key? key, required this.duration, required this.builder}) : super(key: key);
 
   /// Re-build interval.
   final Duration duration;
@@ -662,8 +656,7 @@ class _AutoUpdateState extends State<_AutoUpdate> {
 }
 
 class _DebugOnly extends StatelessWidget {
-  const _DebugOnly({Key? key, required this.enabled, required this.child})
-      : super(key: key);
+  const _DebugOnly({Key? key, required this.enabled, required this.child}) : super(key: key);
 
   final bool enabled;
   final Widget child;
